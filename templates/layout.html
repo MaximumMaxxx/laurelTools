@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
+        <link rel="stylesheet" href="/static/colors.css">
+        <title>Laurel Tools!</title>
+        <link rel="icon" type="image/x-icon" href="/Laureltools.png">
+    </head>
+    <body>
+    <!-- Nav bar -->
+    <div class="container">
+    <nav>
+    <ul>
+
+        <li>
+            <strong>Laurel Tools</strong>
+        </li>
+    </ul>
+    <ul>
+{#        <li><a href="#" role="button" class="outline">URL Shortener</a></li>#}
+        <li><a href="#" role="button" class="outline">YT downloader</a></li>
+{#        <li><a href="#" role="button" class="outline">Pastebin</a></li>#}
+    </ul>
+    </nav>
+
+    </div>
+        {% block content %}{% endblock %}
+    </body>
+</html>

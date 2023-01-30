@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
+    <title>Loading</title>
+  </head>
+  <body>
+    <main class="container">
+        <div class="container">
+            <h2>Your video is now downloading</h2>
+            <p>My internet is slow and converting files is time-consuming, be patient please</p>
+        </div>
+        <progress></progress>
+    </main>
+  </body>
+</html>
+
+<script> window.location.replace("{{ url_for("download", dlid=dlid) }}"); </script>
