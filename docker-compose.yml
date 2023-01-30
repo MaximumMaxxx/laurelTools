@@ -9,3 +9,5 @@ services:
       laurelWeb:
 networks:
   laurelWeb:
+    external: true
+    name: "laurelWeb"
