@@ -5,6 +5,9 @@ import uuid
 from collections import namedtuple
 
 app = Flask(__name__)
+app.config.update(
+    DOWNLOAD_DIR="downloads",
+)
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -16,9 +19,10 @@ AUDIO_VIDEO = "B"
 # Simple state management for downloads
 downloads: "dict[str, video]" = {}
 
+
 @app.route('/')
 def hello_world():  # put application's code here
-    return render_template("index.html",videoInfo=None, download=None)
+    return render_template("index.html", videoInfo=None, download=None)
 
 
 @app.post('/video')
@@ -39,29 +43,29 @@ def video():
     downloads[id] = vid
     return render_template("index.html", videoInfo=videoInfo, download=None)
 
+
 @app.post('/waiting/<dlid>')
 def waiting(dlid):
     downloads[dlid].type = request.form.get("Type")
     return render_template("loading.html", dlid=dlid)
 
+
 @app.route("/download/<dlid>")
 def download(dlid):
-    video = downloads[dlid]
-    print(f"Downloading the file {video}")
-
-    dllocation = f"downloads/{dlid}"
+    dlidVideo = downloads[dlid]
+    dllocation = f"./{app.config['DOWNLOAD_DIR']}/{dlid}"
     opts = {}
 
-    if video.type == AUDIO:
+    if dlidVideo.type == AUDIO:
         opts = {
-        "outtmpl": dllocation,
+            "outtmpl": dllocation,
             'postprocessors': [{
                 'key': 'FFmpegExtractAudio',
                 'preferredcodec': 'wav',
                 'preferredquality': '192',
             }],
         }
-        video.extension = ".wav"
+        dlidVideo.extension = ".wav"
     else:
         opts = {
             "outtmpl": dllocation,
@@ -70,19 +74,20 @@ def download(dlid):
                 'preferedformat': 'mp4',
             }],
         }
-        video.extension = ".mp4"
-
+        dlidVideo.extension = ".mp4"
 
     with YoutubeDL(opts) as downloader:
-        downloader.download([video.videoUrl])
+        downloader.download([dlidVideo.videoUrl])
     downloads.pop(dlid)
-    return render_template("index.html", download=dlid+video.extension, videoInfo=None)
+    return render_template("index.html", download=dlid + dlidVideo.extension, videoInfo=None)
 
-@app.get("/downloads/<path:path>")
+
+@app.get(f"/{app.config['DOWNLOAD_DIR']}/<path:path>")
 def send_file(path):
     return send_from_directory(
-        directory="./downloads/", path=path
+        directory=f"./{app.config['DOWNLOAD_DIR']}/", path=path
     )
+
 
 if __name__ == '__main__':
     app.run(debug=True)

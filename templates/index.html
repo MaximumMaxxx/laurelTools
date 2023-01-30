@@ -23,7 +23,9 @@
     {% endif %}
 
     {% if download != None %}
-        <a href="/downloads/{{ download }}" download id="download" hidden></a>
+        <!-- Set up a link to download the file and then click it with JS -->
+        <!-- This seems like it shouldn't be possible but JS never fails to disappoint -->
+        <a href="/{{ config["DOWNLOAD_DIR"] }}/{{ download }}" download id="download" hidden></a>
         <script>
             document.getElementById("download").click();
         </script>
