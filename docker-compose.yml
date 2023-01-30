@@ -4,4 +4,4 @@ services:
     image: maximummaxx/laureltools:latest
     container_name: laureltools
     ports:
-    - '5000:8090'
+    - '8090:5000'
