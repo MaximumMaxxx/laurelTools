@@ -1,7 +1,11 @@
 version: '3.9'
 services:
-  apache:
+  laurelTools:
     image: maximummaxx/laureltools:latest
     container_name: laureltools
     ports:
     - '8090:5000'
+    networks:
+      laurelWeb:
+networks:
+  laurelWeb:
