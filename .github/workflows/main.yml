@@ -31,9 +31,3 @@ jobs:
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/laureltools:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
-      -
-        name: Re-deploy main site
-        uses: distributhor/workflow-webhook@v2
-        env:
-          webhook_url: ${{ secrets.WEBHOOK_URL }}
-          webhook_secret: ${{ secrets.WEBHOOK_SECRET }}
