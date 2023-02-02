@@ -6,8 +6,9 @@ WORKDIR /app
 
 COPY requirements.txt requirements.txt
 RUN pip3 install -r requirements.txt
+RUN pip3 install gunicorn
 RUN apt-get update && apt-get -y install ffmpeg
 
 COPY . .
 
-CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0"]
+CMD [ "gunicorn" , "--bind=0.0.0.0:5000", "app:app", "--timeout=9999"]
