@@ -16,8 +16,8 @@
         </section>
         <section>
             <form class="grid" method="post" action="{{ url_for("waiting", dlid=videoInfo['dlid']) }}">
-                <button name="Type" value="A" class="secondary">Audio Only</button>
-                <button name="Type" value="B">Audio Video</button>
+                <button name="Type" value="wav" class="secondary">Audio Only</button>
+                <button name="Type" value="mp4">Audio Video</button>
             </form>
         </section>
     {% endif %}
