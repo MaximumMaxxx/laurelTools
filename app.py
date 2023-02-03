@@ -5,7 +5,6 @@ from flask import Flask, render_template, request, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 import logging
 import uuid
-from dataclasses import dataclass
 
 db = SQLAlchemy()
 app = Flask(__name__)
@@ -27,7 +26,11 @@ class Download(db.Model):
 with app.app_context():
     db.create_all()
 
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(
+    filemode="a",
+    level=logging.ERROR,
+    filename="log.log",
+)
 
 AUDIO = "wav"
 AUDIO_VIDEO = "mp4"
