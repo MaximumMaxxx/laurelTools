@@ -1,6 +1,7 @@
 version: '3.9'
 services:
   laurelTools:
+    restart: unless-stopped
     image: maximummaxx/laureltools:latest
     container_name: laureltools
     ports:

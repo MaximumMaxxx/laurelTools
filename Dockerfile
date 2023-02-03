@@ -11,4 +11,4 @@ RUN apt-get update && apt-get -y install ffmpeg
 
 COPY . .
 
-CMD [ "gunicorn" , "--bind=0.0.0.0:5000", "app:app", "--timeout=9999"]
+CMD ["gunicorn" , "--bind=0.0.0.0:5000", "app:app", "--timeout=9999"]
