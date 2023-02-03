@@ -6,7 +6,7 @@ services:
     container_name: laureltools
     hostname: laureltools
     ports:
-    - '8090:5000'
+    - '5000:5000'
     networks:
       laurelWeb:
 networks:
