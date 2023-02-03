@@ -55,6 +55,7 @@ def video():
             )
         videoInfo = {"thumbnail": info['thumbnail'], "dlid": id}
     except Exception:
+        # URL wasn't valid
         videoInfo = None
     print("Made it past downloading!")
 
@@ -69,6 +70,7 @@ def video():
     db.session.add(vidDownload)
     db.session.commit()
     return render_template("index.html", videoInfo=videoInfo, download=None)
+
 
 
 @app.post('/waiting/<dlid>')
