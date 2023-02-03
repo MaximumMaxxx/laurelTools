@@ -4,6 +4,7 @@ services:
     restart: unless-stopped
     image: maximummaxx/laureltools:latest
     container_name: laureltools
+    hostname: laureltools
     ports:
     - '8090:5000'
     networks:
