@@ -72,7 +72,6 @@ def video():
     return render_template("index.html", videoInfo=videoInfo, download=None)
 
 
-
 @app.post('/waiting/<dlid>')
 def waiting(dlid):
     dltype = request.form.get("Type")
