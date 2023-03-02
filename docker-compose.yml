@@ -9,6 +9,12 @@ services:
     - '5000:5000'
     networks:
       laurelWeb:
+    labels:
+        - traefik.enable=true
+        - traefik.http.routers.tools.entrypoints=web,websecure
+        - traefik.http.routers.tools.rule=Host("tools.laurel.community")
+        - traefik.http.routers.tools.tls=true
+        - traefik.http.routers.tools.tls.certresolver=production
 networks:
   laurelWeb:
     external: true
