@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+{% block content %}
+    <main class="container">
+    <h1 style="margin-bottom: 0">YouTube downloader</h1>
+    <p>Enter a YouTube URL to download the video or audio</p>
+
+    <form action="{{ url_for('videoDownloader.video') }}" method='post'>
+        <label>
+            <input type="text" placeholder="Enter URL here" name="url">
+        </label>
+        <input type="submit" placeholder="Hehe">
+    </form>
+
+
+
+    {% if videoInfo != None %}
+        <section>
+            <img style="border-radius: 5px" src="{{ videoInfo['thumbnail'] }}" alt="video thumbnail">
+        </section>
+        <section>
+            <form class="grid" method="post" action="{{ url_for("videoDownloader.waiting", dlid=videoInfo['dlid']) }}">
+                <button name="Type" value="wav" class="secondary">Audio Only</button>
+                <button name="Type" value="mp4">Audio Video</button>
+            </form>
+        </section>
+    {% endif %}
+
+    {% if download != None %}
+        <!-- Set up a link to download the file and then click it with JS -->
+        <!-- This seems like it shouldn't be possible but JS never fails to disappoint -->
+        <a href="/{{ config["DOWNLOAD_DIR"] }}/{{ download }}" download id="download" hidden></a>
+        <script>
+            document.getElementById("download").click();
+        </script>
+    {% endif %}
+
+    </main>
+{% endblock %}

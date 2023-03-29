@@ -1,3 +1,5 @@
 flask
 yt-dlp
 Flask-SQLAlchemy
+openai
+python-dotenv

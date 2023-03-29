@@ -1,0 +1,77 @@
+{% extends "layout.html" %}
+{% block content %}
+    <main class="container">
+        <!-- The editable system prompt -->
+        <h4 style="margin-bottom: 0px">System prompt</h4>
+            <div id="prompt" contenteditable="true">{{ systemPrompt }}</div>
+        <br>
+        <p id="conversation">
+        </p>
+        <form style="margin-bottom: 10px" onsubmit="handleSubmit(event)">
+            <label>
+                <input type="text" name="userPrompt">
+            </label>
+            <input type="submit">
+        </form>
+    </main>
+
+    <script>
+        let messages = []
+        // Handle the form submission
+        function handleSubmit(e) {
+            e.preventDefault()
+            // Get the user prompt
+            let userPrompt = document.querySelector('input[name="userPrompt"]').value
+            // Get the system prompt
+            let systemPrompt = document.querySelector('#prompt').innerText
+            // turn the messages array into a string
+            let messagesString = JSON.stringify(messages)
+            messages.push({
+                role: 'user',
+                content: userPrompt
+            })
+            // Make a POST request to the server
+            fetch('/chat/complete', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    userPrompt: userPrompt,
+                    systemPrompt: systemPrompt,
+                    messages: messagesString
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+                // Update the messages
+                messages.push(data)
+                for (let message of messages) {
+                    console.log(message)
+                    // Great a paragraph element
+                    if (message.role === 'system') {
+                        continue;
+                    }
+                    let p = document.createElement('p')
+
+                    if(message.role === 'user') {
+                        p.classList.add('userMsg')
+                        p.innerText = message.content
+                    } else {
+                        p.classList.add('systemMsg')
+                        p.innerText = message.content
+                    }
+                    // Append the paragraph to the messages div
+                    document.querySelector('#conversation').appendChild(p)
+                }
+                // Clear the user prompt
+                document.querySelector('input[name="userPrompt"]').value = ''
+            })
+            .catch(error => {
+                console.error('Error:', error)
+            })
+        }
+    </script>
+
+{% endblock %}

@@ -8,6 +8,6 @@
         <progress></progress>
     </main>
 
-    <script> window.location.replace("{{ url_for("download", dlid=dlid) }}"); </script>
+    <script> window.location.replace("{{ url_for("videoDownloader.download", dlid=dlid) }}"); </script>
 {% endblock %}
 
