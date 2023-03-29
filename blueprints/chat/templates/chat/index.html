@@ -9,7 +9,7 @@
         </p>
         <form style="margin-bottom: 10px" onsubmit="handleSubmit(event)">
             <label>
-                <input type="text" name="userPrompt">
+                <textarea rows="5" name="userPrompt"></textarea>
             </label>
             <input type="submit">
         </form>
@@ -21,7 +21,8 @@
         function handleSubmit(e) {
             e.preventDefault()
             // Get the user prompt
-            let userPrompt = document.querySelector('input[name="userPrompt"]').value
+            let userPrompt = document.querySelector('textarea[name="userPrompt"]').value
+            document.querySelector('textarea[name="userPrompt"]').value = ''
             // Get the system prompt
             let systemPrompt = document.querySelector('#prompt').innerText
             // turn the messages array into a string
@@ -59,19 +60,37 @@
                         p.classList.add('userMsg')
                         p.innerText = message.content
                     } else {
-                        p.classList.add('systemMsg')
+                        p.classList.add('gptResponse')
                         p.innerText = message.content
                     }
                     // Append the paragraph to the messages div
                     document.querySelector('#conversation').appendChild(p)
                 }
                 // Clear the user prompt
-                document.querySelector('input[name="userPrompt"]').value = ''
             })
             .catch(error => {
                 console.error('Error:', error)
             })
         }
     </script>
+
+    <style>
+        .userMsg {
+            background-color: var(--form-element-border-color);
+            border-radius: 10px;
+            padding: 10px;
+            margin: 10px;
+            width: 50%;
+            float: right;
+        }
+        .gptResponse {
+            background-color: var(--form-element-border-color);
+            border-radius: 10px;
+            padding: 10px;
+            margin: 10px;
+            width: 50%;
+            float: left;
+        }
+    </style>
 
 {% endblock %}
