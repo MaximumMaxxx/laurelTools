@@ -5,8 +5,8 @@
         <h4 style="margin-bottom: 0px">System prompt</h4>
             <div id="prompt" contenteditable="true">{{ systemPrompt }}</div>
         <br>
-        <p id="conversation">
-        </p>
+        <div id="conversation">
+        </div>
         <form style="margin-bottom: 10px" onsubmit="handleSubmit(event)">
             <label>
                 <input type="text" name="userPrompt">
@@ -53,6 +53,7 @@
                     if (message.role === 'system') {
                         continue;
                     }
+                    let pre = document.createElement('pre')
                     let p = document.createElement('p')
 
                     if(message.role === 'user') {
@@ -62,8 +63,9 @@
                         p.classList.add('systemMsg')
                         p.innerText = message.content
                     }
+                    pre.appendChild(p)
                     // Append the paragraph to the messages div
-                    document.querySelector('#conversation').appendChild(p)
+                    document.querySelector('#conversation').appendChild(pre)
                 }
                 // Clear the user prompt
                 document.querySelector('input[name="userPrompt"]').value = ''
