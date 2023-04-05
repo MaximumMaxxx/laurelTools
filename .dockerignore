@@ -1,1 +1,8 @@
 .env
+instance/
+downloads/
+.github
+log.log
+readme.md
+.idea
+venv/
