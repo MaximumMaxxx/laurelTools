@@ -11,7 +11,7 @@
             <label>
                 <textarea rows="5" name="userPrompt"></textarea>
             </label>
-            <input type="submit">
+            <input type="submit" id="chat-submit">
         </form>
     </main>
 
@@ -27,6 +27,8 @@
             let systemPrompt = document.querySelector('#prompt').innerText
             // turn the messages array into a string
             let messagesString = JSON.stringify(messages)
+            // Grab the submit button
+            let submitButton = document.querySelector('#chat-submit')
             messages.push({
                 role: 'user',
                 content: userPrompt
