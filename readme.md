@@ -14,10 +14,7 @@
 ## Depolying
 The only prerequisite to deploy this is docker, docker-compose, and a laureltools_env secret.
 
-To make the secret copy the `.env.example` in a new file called `.env` then run
-```bash
-docker secret create laureltools_env .env
-```
+Make a copy of the `.env.example` file called `.env` and fill in the values.
 
 Then all you have to do is run the docker-compose file
 ```bash
