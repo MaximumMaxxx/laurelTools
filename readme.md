@@ -10,3 +10,18 @@
 - [ ] Make a proper home page
 - [ ] Add a url shortener
 - [ ] Add a pastebin type thing
+
+## Depolying
+The only prerequisite to deploy this is docker, docker-compose, and a laureltools_env secret.
+
+To make the secret copy the `.env.example` in a new file called `.env` then run
+```bash
+docker secret create laureltools_env .env
+```
+
+Then all you have to do is run the docker-compose file
+```bash
+docker-compose up -d
+```
+
+the container will run on port 5000 by default and should have some basic traeffik config to make it work with a reverse proxy automatically. Although you'll have to change it a little bit. Feel free to ignore the `labels` if you don't know what traefik is/don't use it.
