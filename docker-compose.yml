@@ -18,7 +18,7 @@ services:
         - traefik.http.routers.tools.tls=true
         - traefik.http.routers.tools.tls.certresolver=production
     environment:
-      "OPENAI_API_KEY=sk-xxxxx"
+      - OPENAI_API_KEY=sk-xxxx
 networks:
   laurelWeb:
     external: true
