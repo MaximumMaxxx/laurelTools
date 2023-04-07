@@ -7,14 +7,15 @@
   - Audio and video
 
 ## todo
-- [ ] Make a proper home page
+- [ ] Make the home page look nice
+- [ ] Add a format dropdown for the youtube downloader
 - [ ] Add a url shortener
 - [ ] Add a pastebin type thing
 
 ## Depolying
 The only prerequisite to deploy this is docker, docker-compose, and a laureltools_env secret.
 
-Make a copy of the `.env.example` file called `.env` and fill in the values.
+Make a copy of the `.env.example` file called `stack.env` and fill in the values.
 
 Then all you have to do is run the docker-compose file
 ```bash
