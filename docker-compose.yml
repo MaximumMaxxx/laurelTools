@@ -17,8 +17,8 @@ services:
         - traefik.http.routers.tools.rule=Host("tools.laurel.community")
         - traefik.http.routers.tools.tls=true
         - traefik.http.routers.tools.tls.certresolver=production
-    environment:
-      - OPENAI_API_KEY=sk-xxxx
+    env_file:
+        - stack.env
 networks:
   laurelWeb:
     external: true
