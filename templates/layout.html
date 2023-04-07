@@ -5,13 +5,26 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
-        <link rel="stylesheet" href="/static/colors.css">
-        <link rel="stylesheet" href="/static/oneDark.css">
+        <link rel="stylesheet" href="{{ url_for("static",filename="colors.css") }}">
+        <link rel="stylesheet" href="{{ url_for("static",filename="oneDark.css") }}">
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/styles/default.min.css">
 
         <script src="{{ url_for("static", filename="bundle.js") }}"></script>
         <title>Laurel Tools!</title>
-        <link rel="icon" type="image/x-icon" href="/static/Laureltools.png">
+        <link rel="icon" type="image/x-icon" href="{{ url_for("static", filename="Laureltools.png") }}">
+
+        {# embed stuff #}
+        <meta property="og:title" content="Laurel Tools"/>
+        <meta property="og:description" content="The 0bs tools that get stuff done"/>
+        <meta property="og:image" content="{{ url_for("static", filename="Laureltools.png") }}"/>
+        <meta property="og:url" content="https://tools.laurel.community"/>
+        <meta property="og:type" content="website"/>
+
+        <meta name="twitter:card" content="summary_large_image"/>
+        <meta name="twitter:title" content="Laurel Tools"/>
+        <meta name="twitter:description" content="The 0bs tools that get stuff done"/>
+        <meta name="twitter:image" content="{{ url_for("static", filename="Laureltools.png") }}"/>
+        <meta name="twitter:url" content="https://tools.laurel.community"/>
     </head>
 
     <script>
