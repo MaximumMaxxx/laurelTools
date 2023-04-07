@@ -9,7 +9,7 @@ load_dotenv()
 
 db = SQLAlchemy()
 # I think this should be fine
-app = Flask("__main__")
+app = Flask("__app__")
 app.config.update(
     DOWNLOAD_DIR="downloads",
     SQLALCHEMY_DATABASE_URI="sqlite:///project.db"

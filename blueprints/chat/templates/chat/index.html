@@ -7,7 +7,7 @@
         <br>
         <div id="conversation">
         </div>
-        <form style="margin-bottom: 10px" onsubmit="handleSubmit(event)">
+        <form style="margin-bottom: 10px" onsubmit="window.handleSubmit(event)">
             <label>
                 <textarea rows="5" name="userPrompt"></textarea>
             </label>
@@ -15,68 +15,6 @@
         </form>
     </main>
 
-    <script>
-        let messages = []
-        // Handle the form submission
-        function handleSubmit(e) {
-            e.preventDefault()
-            // Get the user prompt
-            let userPrompt = document.querySelector('textarea[name="userPrompt"]').value
-            document.querySelector('textarea[name="userPrompt"]').value = ''
-            // Get the system prompt
-            let systemPrompt = document.querySelector('#prompt').innerText
-            // turn the messages array into a string
-            let messagesString = JSON.stringify(messages)
-            // Grab the submit button
-            let submitButton = document.querySelector('#chat-submit')
-            messages.push({
-                role: 'user',
-                content: userPrompt
-            })
-            // Make a POST request to the server
-            fetch('/chat/complete', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    userPrompt: userPrompt,
-                    systemPrompt: systemPrompt,
-                    messages: messagesString
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log(data)
-                // Update the messages
-                messages.push(data)
-                for (let message of messages) {
-                    console.log(message)
-                    // Great a paragraph element
-                    if (message.role === 'system') {
-                        continue;
-                    }
-                    let pre = document.createElement('pre')
-                    let p = document.createElement('p')
-
-                    if(message.role === 'user') {
-                        p.classList.add('userMsg')
-                        p.innerText = message.content
-                    } else {
-                        p.classList.add('gptResponse')
-                        p.innerText = message.content
-                    }
-                    pre.appendChild(p)
-                    // Append the paragraph to the messages div
-                    document.querySelector('#conversation').appendChild(pre)
-                }
-                // Clear the user prompt
-            })
-            .catch(error => {
-                console.error('Error:', error)
-            })
-        }
-    </script>
 
     <style>
         .userMsg {
